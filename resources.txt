@@ -1,0 +1,16 @@
+Docs:
+https://react-query.tanstack.com/
+https://www.typescriptlang.org/docs/
+https://create-react-app.dev/docs
+
+Hooks in depth:
+https://medium.com/@guptagaruda/react-hooks-understanding-component-re-renders-9708ddee9928
+
+useQuery on button click:
+https://stackoverflow.com/questions/62340697/react-query-how-to-usequery-when-button-is-clicked
+
+Passing props in React using Typescript: 
+https://dev.to/mconner89/passing-props-in-react-using-typescript-20lm
+
+React Query as a State Manager:
+https://tkdodo.eu/blog/react-query-as-a-state-manager

@@ -1,0 +1,28 @@
+.card {
+  background-image: url('../../../public/card_anterior_background-1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  list-style-type: none;
+
+  padding-top: 26.2857%;
+  
+  box-sizing: border-box;
+  width: 20%;
+
+  .name {
+
+  }
+
+  .image {
+
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+  }
+}
