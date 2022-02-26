@@ -5,7 +5,7 @@ import {
 } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 // import Test from '../Test';
-import Deck from '../Deck';
+import List from '../List';
 import './App.scss';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <QueryClientProvider client={new QueryClient()}>
-      <Deck/>
+      <List/>
       <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   );
