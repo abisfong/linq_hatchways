@@ -6,10 +6,19 @@ import { randomNumber } from '../../utils';
 import './ListItem.scss';
 
 const ListItem: FC<{ student: IStudent }> = ({ student }): JSX.Element => {
-  const { firstName, lastName, email, company, skill, grades } = student
+  const { 
+    pic,
+    firstName, 
+    lastName, 
+    email, 
+    company, 
+    skill, 
+    grades
+  } = student
 
   return (
     <li className='list-item'>
+      <img src={pic} alt="user" />
       <ul className='student-information'>
         <li className='name'>{ `${firstName} ${lastName}` }</li>
         <li>Email: { email }</li>
