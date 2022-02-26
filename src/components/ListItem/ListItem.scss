@@ -9,3 +9,8 @@
   
   box-sizing: border-box;
 }
+
+.student-information {
+  display: flex;
+  flex-direction: column;
+}

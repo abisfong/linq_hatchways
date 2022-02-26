@@ -17,7 +17,8 @@ const ListItem: FC<{ student: IStudent }> = ({ student }): JSX.Element => {
     <li className='list-item'>
       <img src={pic} alt="user" />
       <ul className='student-information'>
-        <li className='name'>{ `${firstName} ${lastName}` }</li>
+        <li className='name'>
+        </li>
         <li>Email: { email }</li>
         <li>Company: { company }</li>
         <li>Skill: { skill }</li>

@@ -20,17 +20,15 @@ const List: FC = () => {
   }
   
   return (
-    <div className='list'>
-      <ul>
-        {
-          data?.students.map(student => {
-            return (
-              <ListItem student={student} key={student.id}/>
-            )
-          })
-        }
-      </ul>
-    </div>
+    <ul className='list'>
+      {
+        data?.students.map(student => {
+          return (
+            <ListItem student={student} key={student.id}/>
+          )
+        })
+      }
+    </ul>
   );
 }
 
