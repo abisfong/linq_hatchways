@@ -3,9 +3,9 @@ export default interface IStudent {
   company: string;
   email: string;
   firstName: string;
+  lastName: string;
   grades: number[];
   id: number;
-  lastName: string;
   pic: string;
   skill: string
 }
