@@ -3,14 +3,13 @@ import { useQuery } from 'react-query';
 import IStudent from '../../interfaces/IStudent';
 import { fetchStudents } from '../../utils/studentApi';
 import ListItem from '../ListItem';
-import './list.scss';
+import './List.scss';
 
-const list: FC = () => {
-  const list = [1,2,3,4,5];
+const List: FC = () => {
   const useQueryOptions = {
     refetchOnWindowFocus: false,
   };
-  const { isLoading } = useQuery<{ students: IStudent[] }, Error>(
+  const { data, isLoading } = useQuery<{ students: IStudent[] }, Error>(
     'students',
     fetchStudents,
     useQueryOptions
@@ -24,7 +23,7 @@ const list: FC = () => {
     <div className='list'>
       <ul>
         {
-          list.map(student => {
+          data?.students.map(student => {
             return (
               <ListItem student={student} key={student.id}/>
             )
@@ -35,4 +34,4 @@ const list: FC = () => {
   );
 }
 
-export default list;
+export default List;
