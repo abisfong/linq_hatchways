@@ -8,10 +8,14 @@ import Search from '../Search';
 import './List.scss';
 
 const List: FC = () => {
-  const [trie, setTrie] = useState<Trie>(new Trie([]));
+  const [trie, setTrie] = useState<Trie>(new Trie(undefined));
   const useQueryOptions = {
     refetchOnWindowFocus: false,
-    onSuccess: (data: { students: IStudent[] }) => setTrie(data.students)
+    onSuccess: (data: { students: IStudent[] }) => { 
+      trie.setStudents(data.students);
+      trie.populate();
+      setTrie(trie);
+    }
   };
   const { data, isLoading } = useQuery<{ students: IStudent[] }, Error>(
     'students',
