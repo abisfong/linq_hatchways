@@ -1,10 +1,11 @@
-@import '../../partials/_colors.scss';
+@import '../../partials/colors';
 
-.list {
-  background-color: $silver;
+.list > .row {
   display: flex;
   flex-direction: column;
   list-style-type: none;
+  
+  margin: 0;
   
   align-items: center;
   justify-content: center;
@@ -13,7 +14,7 @@
   width: 100%;
 }
 
-.list > ul {
+.list > .row > ul {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
@@ -27,6 +28,6 @@
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.list > ul::-webkit-scrollbar {
+.list > .row > ul::-webkit-scrollbar {
   display: none;
 }
