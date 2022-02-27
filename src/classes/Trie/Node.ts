@@ -1,8 +1,8 @@
-import IStudent from "../../interfaces/IStudent";
+import Student from "../Student";
 
 export default class Node {
   public value: string | null;
-  public students: { [key: string]: IStudent };
+  public students: { [key: string]: Student };
   public children: { [key: string]: Node };
 
   constructor(value: string | null) {
@@ -11,7 +11,7 @@ export default class Node {
     this.children = {};
   }
 
-  public addChild(char: string, student: IStudent) {
+  public addChild(char: string, student: Student) {
     const lowerCaseChar = char.toLowerCase();
 
     if (!this.children[lowerCaseChar])

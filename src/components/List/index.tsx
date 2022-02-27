@@ -1,20 +1,20 @@
 import { useState, FC } from 'react';
 import { useQuery } from 'react-query';
-import IStudent from '../../interfaces/IStudent';
 import debounce from '../../utils/debounce';
 import sortStudents from '../../utils/sortStudents';
 import { fetchStudents } from '../../utils/studentApi';
-import Trie from '../../utils/Trie';
+import Trie from '../../classes/Trie';
 import ListItem from '../ListItem';
 import Search from '../Search';
 import './List.scss';
+import Student from '../../classes/Student';
 
 const List: FC = () => {
   const [trie, setTrie] = useState<Trie>(new Trie(undefined));
-  const [students, setStudents] = useState<IStudent[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
   const useQueryOptions = {
     refetchOnWindowFocus: false,
-    onSuccess: (data: { students: IStudent[] }) => { 
+    onSuccess: (data: { students: Student[] }) => { 
       const students = sortStudents(data.students);
       
       trie.setStudents(students);
@@ -23,7 +23,7 @@ const List: FC = () => {
       setStudents(students);
     }
   };
-  const { data, isLoading } = useQuery<{ students: IStudent[] }, Error>(
+  const { data, isLoading } = useQuery<{ students: Student[] }, Error>(
     'students',
     fetchStudents,
     useQueryOptions
@@ -31,7 +31,7 @@ const List: FC = () => {
 
   function onChangeHandler(e: any) {
     const input = e.target.value;
-    const students: IStudent[] = trie.search(input);
+    const students: Student[] = trie.search(input);
 
     if (data)
       if (!input.length)

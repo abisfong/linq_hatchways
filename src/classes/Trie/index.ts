@@ -1,21 +1,21 @@
-import IStudent from "../../interfaces/IStudent";
 import sortStudents from "../../utils/sortStudents";
+import Student from "../Student";
 import Node from "./Node";
 
 export default class Trie {
-  private students: IStudent[] | undefined;
+  private students: Student[] | undefined;
   private root: Node;
   
-  constructor(students: IStudent[] | undefined) {
+  constructor(students: Student[] | undefined) {
     this.students = students;
     this.root = new Node(null);
   }
 
-  public setStudents(students: IStudent[]) {
+  public setStudents(students: Student[]) {
     this.students = students;
   }
 
-  public search(input: string): IStudent[] {
+  public search(input: string): Student[] {
     let currNode: Node | undefined = this.root;
 
     for(let i = 0; i < input.length && currNode !== undefined; i++)
@@ -25,7 +25,7 @@ export default class Trie {
   }
 
   public populate(): void {
-    const names: Array<[string, IStudent]> = this.getStudentNames();
+    const names: Array<[string, Student]> = this.getStudentNames();
 
     names.forEach(pair => {
       const name = pair[0];
@@ -39,8 +39,8 @@ export default class Trie {
     })
   }
 
-  private getStudentNames(): Array<[string, IStudent]> {
-    const names: Array<[string, IStudent]> = [];
+  private getStudentNames(): Array<[string, Student]> {
+    const names: Array<[string, Student]> = [];
 
     this.students?.forEach(student => {
       const { firstName, lastName } = student;
