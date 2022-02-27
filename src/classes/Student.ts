@@ -1,3 +1,5 @@
+import sortStudents from "../utils/sortStudents";
+
 export default class Student {
   city: string;
   company: string;
@@ -10,14 +12,9 @@ export default class Student {
   skill: string;
 
   static fromArray(students: Student[]): Student[] {
-    return students
-      .map(student => new Student(student))
-      .sort((studentA, studentB) => {
-        const studentAFullName = studentA.firstName + studentB.lastName;
-        const studentBFullName = studentB.firstName + studentB.lastName;
-
-        return studentAFullName.localeCompare(studentBFullName);
-      })
+    return sortStudents(
+      students.map(student => new Student(student))
+    );
   }
 
   constructor(student: Student) {

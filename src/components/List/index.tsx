@@ -1,7 +1,6 @@
 import { useState, FC } from 'react';
 import { useQuery } from 'react-query';
 import debounce from '../../utils/debounce';
-import sortStudents from '../../utils/sortStudents';
 import { fetchStudents } from '../../utils/studentApi';
 import Trie from '../../classes/Trie';
 import ListItem from '../ListItem';
@@ -21,7 +20,6 @@ const List: FC = () => {
       students.forEach(student => {
         student.names().forEach(name => trie.insert(name, student));
       })
-
       setStudents(students);
     }
   };
