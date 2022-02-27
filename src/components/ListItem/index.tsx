@@ -31,7 +31,7 @@ const ListItem: FC<{ student: IStudent }> = ({ student }): JSX.Element => {
         <li>Company: { company }</li>
         <li>Skill: { skill }</li>
         <li>
-          Average: { roundTo2DecimalPlaces(average) }
+          Average: { roundTo2DecimalPlaces(average) }%
         </li>
       </ul>
     </li>
