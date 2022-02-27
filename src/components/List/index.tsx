@@ -1,6 +1,7 @@
 import { useState, FC } from 'react';
 import { useQuery } from 'react-query';
 import IStudent from '../../interfaces/IStudent';
+import debounce from '../../utils/debounce';
 import sortStudents from '../../utils/sortStudents';
 import { fetchStudents } from '../../utils/studentApi';
 import Trie from '../../utils/Trie';
@@ -46,7 +47,7 @@ const List: FC = () => {
     <div className='list container'>  
       <div className='row py-4 justify-content-center align-items-center'>
         <ul className='col-9'>
-          <Search trie={trie} onChange={ onChangeHandler }/>
+          <Search trie={trie} onChange={ debounce(onChangeHandler) }/>
           {
             students.map(student => {
               return (

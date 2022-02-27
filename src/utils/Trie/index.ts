@@ -21,7 +21,7 @@ export default class Trie {
     for(let i = 0; i < input.length && currNode !== undefined; i++)
       currNode = currNode.get(input[i]);
 
-    return sortStudents(Object.values(currNode.students));
+    return currNode ? sortStudents(Object.values(currNode.students)) : [];
   }
 
   public populate(): void {
