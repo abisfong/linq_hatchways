@@ -12,6 +12,10 @@ const ListItem: FC<{ student: IStudent }> = ({ student }): JSX.Element => {
     skill, 
     grades
   } = student
+  const average = grades.reduce(
+    (acc, grade) => acc + parseInt(grade), 0
+  ) / grades.length
+
 
   return (
     <li className='list-item row'>
@@ -26,10 +30,7 @@ const ListItem: FC<{ student: IStudent }> = ({ student }): JSX.Element => {
         <li>Company: { company }</li>
         <li>Skill: { skill }</li>
         <li>
-          Average: 
-          { 
-            grades.reduce((acc, grade) => acc + grade) / grades.length
-          }
+          Average: { average }
         </li>
       </ul>
     </li>

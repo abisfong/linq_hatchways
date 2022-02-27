@@ -4,7 +4,7 @@ export default interface IStudent {
   email: string;
   firstName: string;
   lastName: string;
-  grades: number[];
+  grades: string[];
   id: number;
   pic: string;
   skill: string
