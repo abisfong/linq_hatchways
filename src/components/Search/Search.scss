@@ -1,3 +1,13 @@
+@import '../../partials/colors';
+
 .search {
+  border: none;
+  border-bottom: solid 2px $silver;
   font-family: 'Raleway';
+
+  margin: 0 2%;
+  padding: 0 8px;
+
+  box-sizing: border-box;
+  width: 96%;
 }

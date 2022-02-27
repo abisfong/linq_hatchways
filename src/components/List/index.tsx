@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import IStudent from '../../interfaces/IStudent';
 import { fetchStudents } from '../../utils/studentApi';
 import ListItem from '../ListItem';
+import Search from '../Search';
 import './List.scss';
 
 const List: FC = () => {
@@ -21,8 +22,9 @@ const List: FC = () => {
   
   return (
     <div className='list container'>  
-      <div className='row py-4'>
+      <div className='row py-4 justify-content-center align-items-center'>
         <ul className='col-9'>
+          <Search />
           {
             data?.students.map(student => {
               return (
