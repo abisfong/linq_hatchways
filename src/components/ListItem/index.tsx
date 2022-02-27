@@ -3,6 +3,7 @@ import Student from '../../classes/Student';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
 import Minus from '../Icons/minus';
 import Plus from '../Icons/plus';
+import Input from '../Input';
 import './ListItem.scss';
 
 const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
@@ -37,12 +38,17 @@ const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
           Average: { roundTo2DecimalPlaces(average) }%
           <ul className={ `grades ${showGrades ? 'open-grades' : ''}` }>
             {
-              grades.map((grade, i) => <li>
-                <span className='test-number'>{`Test ${i + 1}:`}</span>
-                <span className='test-grade'>{grade}%</span>
-              </li>)
+              grades.map((grade, i) => (
+                <li>
+                  <span className='test-number'>{`Test ${i + 1}:`}</span>
+                  <span className='test-grade'>{grade}%</span>
+                </li>
+              ))
             }
           </ul>
+        </li>
+        <li className='tags'>
+          <Input placeholder='Add a tag' onChange={() => {}}/>
         </li>
       </ul>
       <div className='col-sm-2'>
