@@ -14,37 +14,43 @@ export default class Trie {
     this.students = students;
   }
 
-  public search(input: string): string[] {
+  public search(input: string): Set<number> | undefined {
     let currNode: Node = this.root;
 
     for(const char of input) {
       if (!currNode.contains(char))
-        return [];
+        return undefined;
       currNode = currNode.get(char);
     }
 
-    return Array.from(currNode.names).sort();
+    return currNode.students;
   }
 
   public populate(): void {
-    const names: string[] = this.getStudentNames();
+    const names: Array<[string, IStudent]> = this.getStudentNames();
 
-    names.forEach(name => {
+    names.forEach(pair => {
+      const name = pair[0];
+      const student = pair[1];
       let currNode = this.root;
+
       for (const char of name) {
-        currNode.addChild(char, name);
-        currNode = currNode.get(char);
+        const lowerCaseChar = char.toLowerCase();
+        currNode.addChild(lowerCaseChar, student);
+        currNode = currNode.get(lowerCaseChar);
       }
     })
     console.log(this.root);
   }
 
-  private getStudentNames(): string[] {
-    const names: string[] = [];
+  private getStudentNames(): Array<[string, IStudent]> {
+    const names: Array<[string, IStudent]> = [];
 
     this.students?.forEach(student => {
-      names.push(student.firstName.toLowerCase());
-      names.push(student.lastName.toLowerCase());
+      const { firstName, lastName } = student;
+      names.push([firstName.toLowerCase(), student]);
+      names.push([lastName.toLowerCase(), student]);
+      names.push([`${firstName} ${lastName}`, student]);
     });
 
     return names;
