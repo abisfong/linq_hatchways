@@ -21,7 +21,7 @@ const List: FC = () => {
   
   return (
     <div className='list row py-4'>
-      <ul className='col-8'>
+      <ul className='col-lg-8 col-md-10 col-11'>
         {
           data?.students.map(student => {
             return (

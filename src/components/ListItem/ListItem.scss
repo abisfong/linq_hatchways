@@ -38,4 +38,12 @@
     font-weight: bold;
     text-transform: uppercase;
   }
+
+  li {
+    padding-left: 24px;
+  }
+
+  li.name {
+    padding-left: 0;
+  }
 }
