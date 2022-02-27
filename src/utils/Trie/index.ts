@@ -23,7 +23,7 @@ export default class Trie {
       currNode = currNode.get(char);
     }
 
-    return Array.from(currNode?.names).sort();
+    return Array.from(currNode.names).sort();
   }
 
   public populate(): void {
