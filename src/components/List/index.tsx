@@ -25,9 +25,8 @@ const List: FC = () => {
     useQueryOptions
   );
 
-  if (isLoading) {
+  if (isLoading || !students)
     return <div>Loading...</div>
-  }
   
   return (
     <div className='list container'>  
@@ -35,7 +34,7 @@ const List: FC = () => {
         <ul className='col-9'>
           <Search trie={trie}/>
           {
-            data?.students.map(student => {
+            students.map(student => {
               return (
                 <ListItem student={student} key={student.id}/>
               )
