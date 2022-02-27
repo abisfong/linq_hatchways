@@ -4,7 +4,7 @@ import debounce from '../../utils/debounce';
 import { fetchStudents } from '../../utils/studentApi';
 import Trie from '../../classes/Trie';
 import ListItem from '../ListItem';
-import Search from '../Search';
+import Search from '../Input';
 import './List.scss';
 import Student from '../../classes/Student';
 

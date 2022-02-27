@@ -1,16 +1,16 @@
 import { FC, ChangeEventHandler } from 'react';
-import './Search.scss';
+import './Input.scss';
 
-const Search: FC<{ 
+const Input: FC<{ 
   placeholder: string,
   onChange: ChangeEventHandler<HTMLInputElement> 
 }> = ({ placeholder, onChange }) => {
   return <input 
-    className='search' 
+    className='input' 
     type="text" 
     placeholder={ placeholder }
     onChange={ onChange }
   />
 }
 
-export default Search;
+export default Input;

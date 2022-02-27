@@ -37,9 +37,10 @@ const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
           Average: { roundTo2DecimalPlaces(average) }%
           <ul className={ `grades ${showGrades ? 'open-grades' : ''}` }>
             {
-              grades.map((grade, i) => <li>{
-                `Test ${i}: ${grade}`
-              }</li>)
+              grades.map((grade, i) => <li>
+                <span className='test-number'>{`Test ${i + 1}:`}</span>
+                <span className='test-grade'>{grade}%</span>
+              </li>)
             }
           </ul>
         </li>

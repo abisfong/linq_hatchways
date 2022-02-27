@@ -1,7 +1,7 @@
 @import '../../partials/colors';
 @import '../../partials/transitions';
 
-.search {
+.input {
   border: none;
   border-bottom: solid 2px $silver;
   font-family: 'Raleway';
@@ -17,6 +17,6 @@
   width: 96%;
 }
 
-.search:focus {
+.input:focus {
   border-bottom: solid 2px black;
 }
