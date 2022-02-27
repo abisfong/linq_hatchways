@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   list-style-type: none;
+  
+  align-items: center;
+  justify-content: center;
 
-  align-items: flex-start;
+  height: 100vh;
+  width: 100%;
+
+  ul {
+    overflow-y: scroll;
+
+    height: 80%;
+  }
 }
