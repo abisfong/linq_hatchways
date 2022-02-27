@@ -23,10 +23,10 @@ const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
 
   return (
     <li className='list-item row'>
-      <div className='img-container col-lg-3 col-6'>
+      <div className='img-container col-lg-3 col-md-5'>
         <img src={pic} alt="user" />
       </div>
-      <ul className='student-information col-lg-8 col-11'>
+      <ul className='student-information col-lg-7 col-md-5'>
         <li className='name'>
           {`${firstName} ${lastName}`}
         </li>
@@ -37,9 +37,11 @@ const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
           Average: { roundTo2DecimalPlaces(average) }%
         </li>
       </ul>
-      <button className='col-1' onClick={ () => setShowGrades(!showGrades)}>
-        { showGrades ? <Minus /> : <Plus /> }
-      </button>
+      <div className='col-sm-2'>
+        <button  onClick={ () => setShowGrades(!showGrades)}>
+          { showGrades ? <Minus /> : <Plus /> }
+        </button>
+      </div>
     </li>
   )
 }
