@@ -10,16 +10,18 @@ import './List.scss';
 import Student from '../../classes/Student';
 
 const List: FC = () => {
-  const [trie, setTrie] = useState<Trie>(new Trie(undefined));
+  const [trie] = useState<Trie>(new Trie(undefined));
   const [students, setStudents] = useState<Student[]>([]);
   const useQueryOptions = {
     refetchOnWindowFocus: false,
     onSuccess: (data: { students: Student[] }) => { 
-      const students = sortStudents(data.students);
-      
-      trie.setStudents(students);
-      trie.populate();
-      setTrie(trie);
+      const students = Student.fromArray(data.students);
+      console.log(students);
+
+      students.forEach(student => {
+        student.names().forEach(name => trie.insert(name, student));
+      })
+
       setStudents(students);
     }
   };

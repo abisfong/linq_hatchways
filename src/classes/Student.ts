@@ -9,6 +9,17 @@ export default class Student {
   pic: string;
   skill: string;
 
+  static fromArray(students: Student[]): Student[] {
+    return students
+      .map(student => new Student(student))
+      .sort((studentA, studentB) => {
+        const studentAFullName = studentA.firstName + studentB.lastName;
+        const studentBFullName = studentB.firstName + studentB.lastName;
+
+        return studentAFullName.localeCompare(studentBFullName);
+      })
+  }
+
   constructor(student: Student) {
     this.city = student.city;
     this.company = student.company;
@@ -21,16 +32,7 @@ export default class Student {
     this.skill = student.skill;
   }
 
-  getProp(prop: string): string[] | undefined {
-    switch (prop) {
-      case 'names':
-        return this.names();
-      case 'tags':
-        return [];
-    }
-  }
-
-  private names(): string[] {
+  public names(): string[] {
     const fullname = `${this.firstName} ${this.lastName}`;
     return [this.firstName, this.lastName, fullname];
   }
