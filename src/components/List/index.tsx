@@ -47,7 +47,14 @@ const List: FC = () => {
     <div className='list container'>  
       <div className='row py-4 justify-content-center align-items-center'>
         <ul className='col-9'>
-          <Search trie={trie} onChange={ debounce(onChangeHandler) }/>
+          <Search 
+            placeholder='Search by name'
+            onChange={ debounce(onChangeHandler) }
+          />
+          <Search
+            placeholder='Search by tag'
+            onChange={debounce(onChangeHandler)}
+          />
           {
             students.map(student => {
               return (
