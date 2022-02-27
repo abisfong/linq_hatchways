@@ -10,6 +10,7 @@ export default class Student {
   id: number;
   pic: string;
   skill: string;
+  tags: string[];
 
   static fromArray(students: Student[]): Student[] {
     return sortStudents(
@@ -27,6 +28,7 @@ export default class Student {
     this.id = student.id;
     this.pic = student.pic;
     this.skill = student.skill;
+    this.tags = [];
   }
 
   public names(): string[] {

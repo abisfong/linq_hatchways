@@ -7,6 +7,7 @@ import ListItem from '../ListItem';
 import Search from '../Input';
 import './List.scss';
 import Student from '../../classes/Student';
+import Input from '../Input';
 
 const List: FC = () => {
   const [trie] = useState<Trie>(new Trie(undefined));
@@ -15,7 +16,6 @@ const List: FC = () => {
     refetchOnWindowFocus: false,
     onSuccess: (data: { students: Student[] }) => { 
       const students = Student.fromArray(data.students);
-      console.log(students);
 
       students.forEach(student => {
         student.names().forEach(name => trie.insert(name, student));
@@ -39,28 +39,29 @@ const List: FC = () => {
       else
         setStudents(students);
   }
-
-  if (isLoading || !students)
-    return <div>Loading...</div>
   
   return (
     <div className='list container'>  
       <div className='row py-4 justify-content-center align-items-center'>
         <ul className='col-9'>
-          <Search 
+          <Input 
             placeholder='Search by name'
             onChange={ debounce(onChangeHandler) }
+            onSubmit={ undefined }
           />
-          <Search
+          <Input
             placeholder='Search by tag'
             onChange={debounce(onChangeHandler)}
+            onSubmit={ undefined }
           />
-          {
-            students.map(student => {
-              return (
-                <ListItem student={student} key={student.id}/>
-              )
-            })
+          { 
+            (isLoading || !students) ?
+              <div>Loading...</div> :
+              students.map(student => {
+                return (
+                  <ListItem student={student} key={student.id} />
+                )
+              })
           }
         </ul>
       </div>

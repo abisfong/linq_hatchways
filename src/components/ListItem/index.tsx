@@ -48,7 +48,14 @@ const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
           </ul>
         </li>
         <li className='tags'>
-          <Input placeholder='Add a tag' onChange={() => {}}/>
+          <Input 
+            placeholder='Add a tag' 
+            onChange={undefined} 
+            onSubmit={(e) => {
+              e.preventDefault();
+              
+            }
+          }/>
         </li>
       </ul>
       <div className='col-sm-2'>
