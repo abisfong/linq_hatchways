@@ -1,4 +1,5 @@
 import IStudent from "../../interfaces/IStudent";
+import sortStudents from "../sortStudents";
 import Node from "./Node";
 
 export default class Trie {
@@ -14,16 +15,13 @@ export default class Trie {
     this.students = students;
   }
 
-  public search(input: string): Set<number> | undefined {
-    let currNode: Node = this.root;
+  public search(input: string): IStudent[] {
+    let currNode: Node | undefined = this.root;
 
-    for(const char of input) {
-      if (!currNode.contains(char))
-        return undefined;
-      currNode = currNode.get(char);
-    }
+    for(let i = 0; i < input.length && currNode !== undefined; i++)
+      currNode = currNode.get(input[i]);
 
-    return currNode.students;
+    return sortStudents(Object.values(currNode.students));
   }
 
   public populate(): void {

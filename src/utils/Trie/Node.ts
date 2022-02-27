@@ -2,12 +2,12 @@ import IStudent from "../../interfaces/IStudent";
 
 export default class Node {
   public value: string | null;
-  public students: Set<number>;
+  public students: { [key: string]: IStudent };
   public children: { [key: string]: Node };
 
   constructor(value: string | null) {
     this.value = value;
-    this.students = new Set();
+    this.students = {};
     this.children = {};
   }
 
@@ -16,7 +16,7 @@ export default class Node {
 
     if (!this.children[lowerCaseChar])
       this.children[lowerCaseChar] = new Node(lowerCaseChar);
-    this.children[lowerCaseChar].students.add(student.id);
+    this.children[lowerCaseChar].students[student.id] = student;
   }
 
   public get(char: string): Node {
