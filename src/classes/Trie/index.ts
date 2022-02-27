@@ -24,8 +24,8 @@ export default class Trie {
     return currNode ? sortStudents(Object.values(currNode.students)) : [];
   }
 
-  public populate(): void {
-    const names: Array<[string, Student]> = this.getStudentNames();
+  public populate(prop:string): void {
+    const names: Array<[string, Student]> = this.getStudentProp(prop);
 
     names.forEach(pair => {
       const name = pair[0];
@@ -39,16 +39,23 @@ export default class Trie {
     })
   }
 
-  private getStudentNames(): Array<[string, Student]> {
-    const names: Array<[string, Student]> = [];
+  addWord(word, value) {
+    
+  }
+
+  private getStudentProp(prop: string): Array<[string, Student]> {
+    const values: Array<[string, Student]> = [];
 
     this.students?.forEach(student => {
-      const { firstName, lastName } = student;
-      names.push([firstName.toLowerCase(), student]);
-      names.push([lastName.toLowerCase(), student]);
-      names.push([`${firstName} ${lastName}`, student]);
+      // const { firstName, lastName } = student;
+      // names.push([firstName.toLowerCase(), student]);
+      // names.push([lastName.toLowerCase(), student]);
+      // names.push([`${firstName} ${lastName}`, student]);
+      student.getProp(prop)?.forEach(value => {
+        values.push([value, student]);
+      })
     });
 
-    return names;
+    return values;
   }
 }

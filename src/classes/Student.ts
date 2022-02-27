@@ -21,7 +21,17 @@ export default class Student {
     this.skill = student.skill;
   }
 
-  get fullname() {
-    return `${this.firstName} ${this.lastName}`;
+  getProp(prop: string): string[] | undefined {
+    switch (prop) {
+      case 'names':
+        return this.names();
+      case 'tags':
+        return [];
+    }
+  }
+
+  private names(): string[] {
+    const fullname = `${this.firstName} ${this.lastName}`;
+    return [this.firstName, this.lastName, fullname];
   }
 }

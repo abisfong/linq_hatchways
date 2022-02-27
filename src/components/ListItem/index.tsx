@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import IStudent from '../../interfaces/IStudent';
+import Student from '../../classes/Student';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
 import './ListItem.scss';
 
-const ListItem: FC<{ student: IStudent }> = ({ student }): JSX.Element => {
+const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
   const { 
     pic,
     firstName, 
