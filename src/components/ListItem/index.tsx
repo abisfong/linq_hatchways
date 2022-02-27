@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import IStudent from '../../interfaces/IStudent';
+import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
 import './ListItem.scss';
 
 const ListItem: FC<{ student: IStudent }> = ({ student }): JSX.Element => {
@@ -30,7 +31,7 @@ const ListItem: FC<{ student: IStudent }> = ({ student }): JSX.Element => {
         <li>Company: { company }</li>
         <li>Skill: { skill }</li>
         <li>
-          Average: { average }
+          Average: { roundTo2DecimalPlaces(average) }
         </li>
       </ul>
     </li>
