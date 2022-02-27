@@ -55,7 +55,7 @@ const List: FC = () => {
             onSubmit={ undefined }
           />
           { 
-            (isLoading || !students) ?
+            !(isLoading || !students) ?
               <Spinner /> :
               students.map(student => {
                 return (
