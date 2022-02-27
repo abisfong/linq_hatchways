@@ -47,3 +47,14 @@
     padding-left: 0;
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .list-item {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .student-information li {
+    padding-left: 0;
+  }
+}
