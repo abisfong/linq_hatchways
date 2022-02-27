@@ -1,4 +1,5 @@
 @import '../../partials/colors';
+@import '../../partials/transitions';
 
 .list-item {
   border-bottom: solid 1px $silver;
@@ -31,6 +32,8 @@
 
   .plus-icon, 
   .minus-icon {
+    fill: $grey;
+    
     margin: 14px 0 0 35%;
 
     height: 48px;
@@ -45,8 +48,8 @@
 .student-information {
   display: flex;
   flex-direction: column;
-  list-style-type: none;
   justify-self: center;
+  overflow: hidden;
 
   .name {
     font-size: 48px;
@@ -55,11 +58,28 @@
   }
 
   li {
+    line-height: 1.5;
+    
     padding-left: 24px;
   }
 
-  li.name {
+  li.name, .grades > li {
+    line-height: 1;
+
     padding-left: 0;
+  }
+
+  li.email, .grades {
+    padding-top: 24px;
+  }
+
+  .grades {
+    transition: max-height 500ms $cubicBezierNoDelay;
+    max-height: 0;
+  }
+
+  .open-grades {
+    max-height: 100vh;
   }
 }
 
