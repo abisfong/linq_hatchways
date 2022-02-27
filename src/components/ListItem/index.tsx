@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
 import Student from '../../classes/Student';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
-import Minus from '../Icons/minus';
-import Plus from '../Icons/plus';
+import Minus from '../Icons/Minus';
+import Plus from '../Icons/Plus';
 import Input from '../Input';
 import './ListItem.scss';
 
@@ -53,7 +53,7 @@ const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
             onChange={undefined} 
             onSubmit={(e) => {
               e.preventDefault();
-              
+
             }
           }/>
         </li>

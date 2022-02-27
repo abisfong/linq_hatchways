@@ -4,10 +4,10 @@ import debounce from '../../utils/debounce';
 import { fetchStudents } from '../../utils/studentApi';
 import Trie from '../../classes/Trie';
 import ListItem from '../ListItem';
-import Search from '../Input';
 import './List.scss';
 import Student from '../../classes/Student';
 import Input from '../Input';
+import Spinner from '../Icons/Spinner';
 
 const List: FC = () => {
   const [trie] = useState<Trie>(new Trie(undefined));
@@ -56,7 +56,7 @@ const List: FC = () => {
           />
           { 
             (isLoading || !students) ?
-              <div>Loading...</div> :
+              <Spinner /> :
               students.map(student => {
                 return (
                   <ListItem student={student} key={student.id} />

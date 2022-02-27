@@ -25,3 +25,5 @@ const Spinner: FC = () => {
     </svg>
   )
 } 
+
+export default Spinner;
