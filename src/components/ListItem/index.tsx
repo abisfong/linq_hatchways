@@ -23,10 +23,10 @@ const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
 
   return (
     <li className='list-item row'>
-      <div className='img-container col-lg-3 col-md-5'>
+      <div className='img-container col-lg-3 col-md-8 col-sm-10'>
         <img src={pic} alt="user" />
       </div>
-      <ul className='student-information col-lg-7 col-md-5'>
+      <ul className='student-information col-lg-7 col-md-12'>
         <li className='name'>
           {`${firstName} ${lastName}`}
         </li>

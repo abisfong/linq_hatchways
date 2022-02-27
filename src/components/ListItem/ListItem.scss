@@ -96,7 +96,7 @@
     
     .plus-icon,
     .minus-icon {
-      margin: 14px 0 0 12%;
+      margin: 14px 0 0 0;
   
       height: 48px;
       width: 48px;
@@ -108,18 +108,6 @@
 
     .test-number {
       text-align: left;
-    }
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  .list-item {
-    .plus-icon,
-    .minus-icon {
-      margin: 14px 0 0 0;
-
-      height: 48px;
-      width: 48px;
     }
   }
 }
