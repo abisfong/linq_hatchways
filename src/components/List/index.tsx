@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useQuery } from 'react-query';
 import IStudent from '../../interfaces/IStudent';
 import { fetchStudents } from '../../utils/studentApi';

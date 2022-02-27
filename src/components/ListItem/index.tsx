@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import IStudent from '../../interfaces/IStudent';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
 import './ListItem.scss';
