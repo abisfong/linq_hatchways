@@ -1,5 +1,4 @@
 import { FC, ChangeEventHandler } from 'react';
-import IStudent from '../../interfaces/IStudent';
 import Trie from '../../classes/Trie';
 import './Search.scss';
 
