@@ -35,9 +35,8 @@ export default class Trie {
       let currNode = this.root;
 
       for (const char of name) {
-        const lowerCaseChar = char.toLowerCase();
-        currNode.addChild(lowerCaseChar, student);
-        currNode = currNode.get(lowerCaseChar);
+        currNode.addChild(char, student);
+        currNode = currNode.get(char);
       }
     })
     console.log(this.root);

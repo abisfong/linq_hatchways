@@ -12,16 +12,22 @@ export default class Node {
   }
 
   public addChild(char: string, student: IStudent) {
-    if (!this.children[char])
-      this.children[char] = new Node(char);
-    this.children[char].students.add(student.id);
+    const lowerCaseChar = char.toLowerCase();
+
+    if (!this.children[lowerCaseChar])
+      this.children[lowerCaseChar] = new Node(lowerCaseChar);
+    this.children[lowerCaseChar].students.add(student.id);
   }
 
   public get(char: string): Node {
-    return this.children[char];
+    const lowerCaseChar = char.toLowerCase();
+
+    return this.children[lowerCaseChar];
   }
 
   public contains(char: string): boolean {
-    return this.children[char] !== undefined;
+    const lowerCaseChar = char.toLowerCase();
+
+    return this.children[lowerCaseChar] !== undefined;
   }
 }
