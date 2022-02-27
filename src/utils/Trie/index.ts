@@ -14,7 +14,19 @@ export default class Trie {
     this.students = students;
   }
 
-  public populate() {
+  public search(input: string): string[] {
+    let currNode: Node = this.root;
+
+    for(const char of input) {
+      if (!currNode.contains(char))
+        return [];
+      currNode = currNode.get(char);
+    }
+
+    return Array.from(currNode?.names).sort();
+  }
+
+  public populate(): void {
     const names: string[] = this.getStudentNames();
 
     names.forEach(name => {

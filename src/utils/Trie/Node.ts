@@ -15,9 +15,11 @@ export default class Node {
     this.children[char].names.add(name);
   }
 
-  public get(char: string) {
-    if (!this.children[char])
-      this.children[char] = new Node(char);
+  public get(char: string): Node {
     return this.children[char];
+  }
+
+  public contains(char: string): boolean {
+    return this.children[char] !== undefined;
   }
 }
