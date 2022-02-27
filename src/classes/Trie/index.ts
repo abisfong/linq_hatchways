@@ -1,5 +1,5 @@
 import IStudent from "../../interfaces/IStudent";
-import sortStudents from "../sortStudents";
+import sortStudents from "../../utils/sortStudents";
 import Node from "./Node";
 
 export default class Trie {
