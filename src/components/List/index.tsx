@@ -9,12 +9,14 @@ import './List.scss';
 
 const List: FC = () => {
   const [trie, setTrie] = useState<Trie>(new Trie(undefined));
+  const [students, setStudents] = useState<IStudent[]>([]);
   const useQueryOptions = {
     refetchOnWindowFocus: false,
     onSuccess: (data: { students: IStudent[] }) => { 
       trie.setStudents(data.students);
       trie.populate();
       setTrie(trie);
+      setStudents(data.students);
     }
   };
   const { data, isLoading } = useQuery<{ students: IStudent[] }, Error>(

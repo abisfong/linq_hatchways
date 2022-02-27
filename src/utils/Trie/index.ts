@@ -39,7 +39,6 @@ export default class Trie {
         currNode = currNode.get(char);
       }
     })
-    console.log(this.root);
   }
 
   private getStudentNames(): Array<[string, IStudent]> {
@@ -54,6 +53,4 @@ export default class Trie {
 
     return names;
   }
-
-  
 }
