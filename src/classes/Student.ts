@@ -1,5 +1,3 @@
-import sortStudents from "../utils/sortStudents";
-
 export default class Student {
   city: string;
   company: string;
@@ -13,9 +11,7 @@ export default class Student {
   tags: string[];
 
   static fromArray(students: Student[]): Student[] {
-    return sortStudents(
-      students.map(student => new Student(student))
-    );
+    return students.map(student => new Student(student))
   }
 
   constructor(student: Student) {

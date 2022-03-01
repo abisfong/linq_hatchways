@@ -1,5 +1,5 @@
-import { useState, FC, FormEvent } from 'react';
-import { useQuery } from 'react-query';
+import { useState, FC } from 'react';
+import { useQuery, QueryClient } from 'react-query';
 import debounce from '../../utils/debounce';
 import { fetchStudents } from '../../utils/studentApi';
 import Trie from '../../classes/Trie';
@@ -28,6 +28,17 @@ const List: FC = () => {
     fetchStudents,
     useQueryOptions
   );
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        staleTime: Infinity,
+      },
+    },
+  })
+
+  if (!queryClient.getQueryData('tags'))
+    queryClient.setQueryData('tags', {});
 
   function onChangeHandler(branchName: string): Function {
     return (e: any) => {
@@ -62,7 +73,11 @@ const List: FC = () => {
               <Spinner /> :
               students.map(student => {
                 return (
-                  <ListItem student={student} key={student.id} />
+                  <ListItem 
+                    student={ student } 
+                    key={ student.id } 
+                    queryClient={ queryClient }
+                  />
                 )
               })
           }

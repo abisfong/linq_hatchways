@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { QueryClient } from 'react-query'
 import Student from '../../classes/Student';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
 import Minus from '../Icons/MinusIcon';
@@ -6,7 +7,7 @@ import Plus from '../Icons/PlusIcon';
 import Input from '../Input';
 import './ListItem.scss';
 
-const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
+const ListItem: FC<{ student: Student, queryClient: QueryClient }> = ({ student }): JSX.Element => {
   const [showGrades, setShowGrades] = useState<boolean>(false);
   const { 
     pic,
