@@ -7,7 +7,13 @@ import Plus from '../Icons/PlusIcon';
 import Input from '../Input';
 import './ListItem.scss';
 
-const ListItem: FC<{ student: Student, queryClient: QueryClient }> = ({ student }): JSX.Element => {
+const ListItem: FC<{ 
+  student: Student, 
+  queryClient: QueryClient 
+}> = ({ 
+  student, 
+  queryClient 
+}): JSX.Element => {
   const [showGrades, setShowGrades] = useState<boolean>(false);
   const { 
     pic,
@@ -21,6 +27,8 @@ const ListItem: FC<{ student: Student, queryClient: QueryClient }> = ({ student 
   const average = grades.reduce(
     (acc, grade) => acc + parseInt(grade), 0
   ) / grades.length
+  const allTags = queryClient.getQueryData<{ [ key: number]: string[] }>('tags');
+  const studentTags = allTags ? allTags[student.id] : [];
 
 
   return (
@@ -37,11 +45,11 @@ const ListItem: FC<{ student: Student, queryClient: QueryClient }> = ({ student 
         <li>Skill: { skill }</li>
         <li>
           Average: { roundTo2DecimalPlaces(average) }%
-          <ul className={ `grades ${showGrades ? 'open-grades' : ''}` }>
+          <ul className={ `grades ${ showGrades ? 'open-grades' : '' }` }>
             {
               grades.map((grade, i) => (
-                <li key={i}>
-                  <span className='test-number'>{`Test ${i + 1}:`}</span>
+                <li key={ i }>
+                  <span className='test-number'>{`Test ${ i + 1 }:`}</span>
                   <span className='test-grade'>{grade}%</span>
                 </li>
               ))
@@ -49,10 +57,19 @@ const ListItem: FC<{ student: Student, queryClient: QueryClient }> = ({ student 
           </ul>
         </li>
         <li className='tags'>
+          <ul>
+            {
+              studentTags.map((tag, i) => (
+                <li key={ i }>
+                  { tag }
+                </li>
+              ))
+            }
+          </ul>
           <Input 
             placeholder='Add a tag' 
-            onChange={undefined} 
-            onSubmit={(e) => {
+            onChange={ undefined } 
+            onSubmit={ (e) => {
               e.preventDefault();
 
             }

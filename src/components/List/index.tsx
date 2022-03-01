@@ -42,7 +42,6 @@ const List: FC = () => {
 
   function onChangeHandler(branchName: string): Function {
     return (e: any) => {
-      console.log(e);
       const input = e.target.value;
       const students: Student[] = trie.search(branchName, input);
   
