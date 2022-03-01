@@ -1,4 +1,4 @@
-import { useState, FC, SyntheticEvent } from 'react';
+import { useState, FC, FormEvent } from 'react';
 import { useQuery } from 'react-query';
 import debounce from '../../utils/debounce';
 import { fetchStudents } from '../../utils/studentApi';
@@ -29,11 +29,10 @@ const List: FC = () => {
     useQueryOptions
   );
 
-  function onChangeHandler(branchName: string) {
-    return (e: SyntheticEvent<HTMLInputElement>) => {
-      const input = e.currentTarget.value;
+  function onChangeHandler(branchName: string): Function {
+    return (e: any) => {
       console.log(e);
-      console.log(input);
+      const input = e.target.value;
       const students: Student[] = trie.search(branchName, input);
   
       if (data)

@@ -39,7 +39,7 @@ const ListItem: FC<{ student: Student }> = ({ student }): JSX.Element => {
           <ul className={ `grades ${showGrades ? 'open-grades' : ''}` }>
             {
               grades.map((grade, i) => (
-                <li>
+                <li key={i}>
                   <span className='test-number'>{`Test ${i + 1}:`}</span>
                   <span className='test-grade'>{grade}%</span>
                 </li>
