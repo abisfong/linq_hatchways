@@ -1,5 +1,5 @@
 import { useState, FC } from 'react';
-import { useQuery, QueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import debounce from '../../utils/debounce';
 import { fetchStudents } from '../../utils/studentApi';
 import Trie from '../../classes/Trie';
@@ -28,17 +28,6 @@ const List: FC = () => {
     fetchStudents,
     useQueryOptions
   );
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        staleTime: Infinity,
-      },
-    },
-  })
-
-  if (!queryClient.getQueryData('tags'))
-    queryClient.setQueryData('tags', {});
 
   function onChangeHandler(branchName: string): Function {
     return (e: any) => {
@@ -60,12 +49,12 @@ const List: FC = () => {
           <Input 
             placeholder='Search by name'
             onChange={ debounce(onChangeHandler('students')) }
-            onSubmit={ undefined }
+            onKeyDown={ undefined }
           />
           <Input
             placeholder='Search by tag'
             onChange={debounce(onChangeHandler('tags'))}
-            onSubmit={ undefined }
+            onKeyDown={undefined}
           />
           { 
             (isLoading || !students) ?
@@ -75,7 +64,6 @@ const List: FC = () => {
                   <ListItem 
                     student={ student } 
                     key={ student.id } 
-                    queryClient={ queryClient }
                   />
                 )
               })

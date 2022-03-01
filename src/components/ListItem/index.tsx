@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, SyntheticEvent, useState } from 'react';
 import { QueryClient } from 'react-query'
 import Student from '../../classes/Student';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
@@ -9,10 +9,8 @@ import './ListItem.scss';
 
 const ListItem: FC<{ 
   student: Student, 
-  queryClient: QueryClient 
 }> = ({ 
-  student, 
-  queryClient 
+  student
 }): JSX.Element => {
   const [showGrades, setShowGrades] = useState<boolean>(false);
   const { 
@@ -24,12 +22,16 @@ const ListItem: FC<{
     skill, 
     grades
   } = student
-  const average = grades.reduce(
-    (acc, grade) => acc + parseInt(grade), 0
-  ) / grades.length
-  const allTags = queryClient.getQueryData<{ [ key: number]: string[] }>('tags');
-  const studentTags = allTags ? allTags[student.id] : [];
+  const tags = student.tags;
 
+  function onKeyDownHandler(e: any) {
+    const inputEl = e.target
+
+    if (e.key === 'Enter') {
+      tags.push(inputEl.value);
+      inputEl.value = '';
+    }
+  }
 
   return (
     <li className='list-item row'>
@@ -44,7 +46,7 @@ const ListItem: FC<{
         <li>Company: { company }</li>
         <li>Skill: { skill }</li>
         <li>
-          Average: { roundTo2DecimalPlaces(average) }%
+          Average: { roundTo2DecimalPlaces(student.average) }%
           <ul className={ `grades ${ showGrades ? 'open-grades' : '' }` }>
             {
               grades.map((grade, i) => (
@@ -59,7 +61,7 @@ const ListItem: FC<{
         <li className='tags'>
           <ul>
             {
-              studentTags.map((tag, i) => (
+              tags.map((tag, i) => (
                 <li key={ i }>
                   { tag }
                 </li>
@@ -68,16 +70,13 @@ const ListItem: FC<{
           </ul>
           <Input 
             placeholder='Add a tag' 
-            onChange={ undefined } 
-            onSubmit={ (e) => {
-              e.preventDefault();
-
-            }
-          }/>
+            onKeyDown={ onKeyDownHandler }
+            onChange={ undefined }
+          />
         </li>
       </ul>
       <div className='col-sm-2'>
-        <button  onClick={ () => setShowGrades(!showGrades)}>
+        <button  onClick={ () => setShowGrades(!showGrades) }>
           { showGrades ? <Minus /> : <Plus /> }
         </button>
       </div>
@@ -86,3 +85,16 @@ const ListItem: FC<{
 }
 
 export default ListItem;
+
+// var reverse = function (x) {
+//   let rev = 0;
+//   while (x !== 0) {
+//     const digit = x % 10;
+//     x = ~~(x / 10);
+//     rev = rev * 10 + digit;
+//     if (rev < Math.pow(-2, 31) || rev > Math.pow(2, 31) - 1) {
+//       return 0;
+//     }
+//   }
+//   return rev;
+// };

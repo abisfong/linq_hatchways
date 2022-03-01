@@ -9,6 +9,7 @@ export default class Student {
   pic: string;
   skill: string;
   tags: string[];
+  average: number;
 
   static fromArray(students: Student[]): Student[] {
     return students.map(student => new Student(student))
@@ -25,6 +26,9 @@ export default class Student {
     this.pic = student.pic;
     this.skill = student.skill;
     this.tags = [];
+    this.average = this.grades.reduce(
+      (acc, grade) => acc + parseInt(grade), 0
+    ) / this.grades.length
   }
 
   public names(): string[] {
