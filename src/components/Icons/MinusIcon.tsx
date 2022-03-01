@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const Minus: FC = () => {
+const MinusIcon: FC = () => {
   return (
     <svg 
       className='minus-icon'
@@ -15,4 +15,4 @@ const Minus: FC = () => {
   )
 }
 
-export default Minus;
+export default MinusIcon;

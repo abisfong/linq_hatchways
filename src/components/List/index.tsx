@@ -1,4 +1,4 @@
-import { useState, FC } from 'react';
+import { useState, FC, SyntheticEvent } from 'react';
 import { useQuery } from 'react-query';
 import debounce from '../../utils/debounce';
 import { fetchStudents } from '../../utils/studentApi';
@@ -7,10 +7,10 @@ import ListItem from '../ListItem';
 import './List.scss';
 import Student from '../../classes/Student';
 import Input from '../Input';
-import Spinner from '../Icons/Spinner';
+import Spinner from '../Icons/SpinnerIcon';
 
 const List: FC = () => {
-  const [trie] = useState<Trie>(new Trie(undefined));
+  const [trie] = useState<Trie>(new Trie());
   const [students, setStudents] = useState<Student[]>([]);
   const useQueryOptions = {
     refetchOnWindowFocus: false,
@@ -18,7 +18,7 @@ const List: FC = () => {
       const students = Student.fromArray(data.students);
 
       students.forEach(student => {
-        student.names().forEach(name => trie.insert(name, student));
+        student.names().forEach(name => trie.insert('students', name, student));
       })
       setStudents(students);
     }
@@ -29,15 +29,17 @@ const List: FC = () => {
     useQueryOptions
   );
 
-  function onChangeHandler(e: any) {
-    const input = e.target.value;
-    const students: Student[] = trie.search(input);
-
-    if (data)
-      if (!input.length)
-        setStudents(data.students);
-      else
-        setStudents(students);
+  function onChangeHandler(branchName: string) {
+    return (e: SyntheticEvent<HTMLInputElement>) => {
+      const input = e.currentTarget.value;
+      const students: Student[] = trie.search(branchName, input);
+  
+      if (data)
+        if (!input.length)
+          setStudents(data.students);
+        else
+          setStudents(students);
+    }
   }
   
   return (
@@ -46,16 +48,16 @@ const List: FC = () => {
         <ul className='col-9'>
           <Input 
             placeholder='Search by name'
-            onChange={ debounce(onChangeHandler) }
+            onChange={ debounce(onChangeHandler('students')) }
             onSubmit={ undefined }
           />
           <Input
             placeholder='Search by tag'
-            onChange={debounce(onChangeHandler)}
+            onChange={debounce(onChangeHandler('tags'))}
             onSubmit={ undefined }
           />
           { 
-            !(isLoading || !students) ?
+            (isLoading || !students) ?
               <Spinner /> :
               students.map(student => {
                 return (

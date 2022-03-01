@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const Plus: FC = () => {
+const PlusIcon: FC = () => {
   return (
     <svg 
       className='plus-icon'
@@ -16,4 +16,4 @@ const Plus: FC = () => {
   )
 }
 
-export default Plus;
+export default PlusIcon;

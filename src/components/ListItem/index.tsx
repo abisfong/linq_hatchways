@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
 import Student from '../../classes/Student';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
-import Minus from '../Icons/Minus';
-import Plus from '../Icons/Plus';
+import Minus from '../Icons/MinusIcon';
+import Plus from '../Icons/PlusIcon';
 import Input from '../Input';
 import './ListItem.scss';
 

@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import './Spinner.scss';
+import './SpinnerIcon.scss';
 
-const Spinner: FC = () => {
+const SpinnerIcon: FC = () => {
   return (
     <div className='spinner-icon-container'>
       <svg 
@@ -29,4 +29,4 @@ const Spinner: FC = () => {
   )
 } 
 
-export default Spinner;
+export default SpinnerIcon;
