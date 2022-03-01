@@ -1,6 +1,10 @@
 import Student from "../classes/Student";
 
-export const fetchStudents = async (): Promise<{ students: Student[] }> => {
+export const fetchStudents = async (): Promise<Student[]> => {
   return await fetch(`https://api.hatchways.io/assessment/students`)
-    .then(response => response.json())
+    .then(async response => { 
+      const { students  } = await response.json();
+
+      return Student.fromArray(students);
+    })
 }

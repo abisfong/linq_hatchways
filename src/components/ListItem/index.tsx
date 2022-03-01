@@ -30,6 +30,7 @@ const ListItem: FC<{
     if (e.key === 'Enter') {
       tags.push(inputEl.value);
       inputEl.value = '';
+      console.log(student);
     }
   }
 

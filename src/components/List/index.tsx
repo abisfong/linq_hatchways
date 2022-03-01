@@ -14,16 +14,16 @@ const List: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const useQueryOptions = {
     refetchOnWindowFocus: false,
-    onSuccess: (data: { students: Student[] }) => { 
-      const students = Student.fromArray(data.students);
+    onSuccess: (students: Student[]) => { 
 
       students.forEach(student => {
+        // console.log(student);
         student.names().forEach(name => trie.insert('students', name, student));
       })
       setStudents(students);
     }
   };
-  const { data, isLoading } = useQuery<{ students: Student[] }, Error>(
+  const { data, isLoading } = useQuery<Student[], Error>(
     'students',
     fetchStudents,
     useQueryOptions
@@ -36,7 +36,7 @@ const List: FC = () => {
   
       if (data)
         if (!input.length)
-          setStudents(data.students);
+          setStudents(data);
         else
           setStudents(students);
     }
