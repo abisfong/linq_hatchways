@@ -19,7 +19,7 @@ export default class Trie {
   }
 
   public insert(branchName: string, string: string, value: Student) {
-    let currNode = this.root[branchName];
+    let currNode = this.root[branchName] || (this.root[branchName] = new Node(null));
 
     for (const char of string) {
       currNode.addChild(char, value);

@@ -32,6 +32,8 @@ const List: FC = () => {
   function onChangeHandler(branchName: string) {
     return (e: SyntheticEvent<HTMLInputElement>) => {
       const input = e.currentTarget.value;
+      console.log(e);
+      console.log(input);
       const students: Student[] = trie.search(branchName, input);
   
       if (data)
