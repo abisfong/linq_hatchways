@@ -3,14 +3,14 @@ import Student from "../Student";
 import Node from "./Node";
 
 export default class Trie {
-  private root: Node;
+  private root: { [key: string]: Node};
   
-  constructor(students: Student[] | undefined) {
-    this.root = new Node(null);
+  constructor() {
+    this.root = {};
   }
 
-  public search(input: string): Student[] {
-    let currNode: Node | undefined = this.root;
+  public search(branchName: string, input: string): Student[] {
+    let currNode: Node | undefined = this.root[branchName];
 
     for(let i = 0; i < input.length && currNode !== undefined; i++)
       currNode = currNode.get(input[i]);
@@ -18,8 +18,8 @@ export default class Trie {
     return currNode ? sortStudents(Object.values(currNode.students)) : [];
   }
 
-  public insert(string: string, value: Student) {
-    let currNode = this.root;
+  public insert(branchName: string, string: string, value: Student) {
+    let currNode = this.root[branchName];
 
     for (const char of string) {
       currNode.addChild(char, value);
