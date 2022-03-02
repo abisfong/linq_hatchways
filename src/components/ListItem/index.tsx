@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { QueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import Student from '../../classes/Student';
 import Trie from '../../classes/Trie';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
@@ -24,8 +24,8 @@ const ListItem: FC<{
     skill, 
     grades
   } = student
-  const queryClient = new QueryClient();
-  const trie = queryClient.getQueryData<Trie>('trie');
+  const trieQuery = useQuery<Trie>('trie');
+  const trie = trieQuery.data;
 
   function onKeyDownHandler(e: any) {
     const inputEl = e.target;
@@ -36,6 +36,7 @@ const ListItem: FC<{
       student.tags.push(inputEl.value);
       setTags([...student.tags]);
       inputEl.value = '';
+      console.log('trie', trie);
     }
   }
 

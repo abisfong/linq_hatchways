@@ -10,7 +10,7 @@ import Input from '../Input';
 import Spinner from '../Icons/SpinnerIcon';
 
 const List: FC = () => {
-  // const [trie] = useState<Trie>(new Trie());
+  const [searchInput] = useState<{ [key: string]: string }>({});
   const [students, setStudents] = useState<Student[]>([]);
   const useQueryOptions = {
     onSuccess: (students: Student[]) => { 
@@ -29,8 +29,15 @@ const List: FC = () => {
   );
   const trieQuery = useQuery<Trie>(
     'trie', 
-    () => new Trie(), 
+    { 
+      refetchOnWindowFocus: false,
+      initialData: new Trie(),
+      enabled: false
+    }
   );
+
+  if (trieQuery.status !== 'success')
+    trieQuery.refetch();
 
   function onChangeHandler(branchName: string): Function {
     return (e: any) => {
@@ -38,11 +45,12 @@ const List: FC = () => {
       const trie = trieQuery.data;
       const students = trie ? trie.search(branchName, input) : [];
   
-      if (studentsQuery.data)
-        if (!input.length)
-          setStudents(studentsQuery.data);
-        else
-          setStudents(students);
+      if (studentsQuery.data && !input.length)
+        setStudents(studentsQuery.data);
+      else
+        setStudents(students);
+
+      searchInput[branchName] = input;
     }
   }
   
