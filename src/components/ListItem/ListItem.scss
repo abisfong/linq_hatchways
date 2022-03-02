@@ -88,7 +88,11 @@
     width: 87px;
   }
 
-  .tags + input {
+  .tags {
+    background-color: #fff;
+  }
+
+  .tags > input {
     font-size: 16px;
     
     margin: 0;
@@ -96,8 +100,16 @@
     width: 140px;
   }
 
+  .tags > ul {
+    display: flex;
+  }
+
   .tag {
+    background-color: $silver-dark;
+    border-radius: 4px;
     
+    margin: 4px;
+    padding: 8px;
   }
 }
 

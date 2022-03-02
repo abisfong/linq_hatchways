@@ -60,8 +60,8 @@ const ListItem: FC<{
             }
           </ul>
         </li>
-        <li>
-          <ul className='tags'>
+        <li className='tags'>
+          <ul>
             {
               tags.map((tag, i) => (
                 <li className='tag' key={ i }>
