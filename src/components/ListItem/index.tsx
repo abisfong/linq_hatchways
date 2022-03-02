@@ -1,5 +1,4 @@
-import { FC, SyntheticEvent, useState } from 'react';
-import { QueryClient } from 'react-query'
+import { FC, useState } from 'react';
 import Student from '../../classes/Student';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
 import Minus from '../Icons/MinusIcon';

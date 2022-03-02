@@ -10,33 +10,38 @@ import Input from '../Input';
 import Spinner from '../Icons/SpinnerIcon';
 
 const List: FC = () => {
-  const [trie] = useState<Trie>(new Trie());
+  // const [trie] = useState<Trie>(new Trie());
   const [students, setStudents] = useState<Student[]>([]);
   const useQueryOptions = {
-    refetchOnWindowFocus: false,
     onSuccess: (students: Student[]) => { 
+      const trie = trieQuery.data;
 
       students.forEach(student => {
         // console.log(student);
-        student.names().forEach(name => trie.insert('students', name, student));
+        student.names().forEach(name => trie?.insert('students', name, student));
       })
       setStudents(students);
     }
   };
-  const { data, isLoading } = useQuery<Student[], Error>(
+  const studentsQuery = useQuery<Student[], Error>(
     'students',
     fetchStudents,
     useQueryOptions
+  );
+  const trieQuery = useQuery<Trie>(
+    'trie', 
+    () => new Trie(), 
   );
 
   function onChangeHandler(branchName: string): Function {
     return (e: any) => {
       const input = e.target.value;
-      const students: Student[] = trie.search(branchName, input);
+      const trie = trieQuery.data;
+      const students = trie ? trie.search(branchName, input) : [];
   
-      if (data)
+      if (studentsQuery.data)
         if (!input.length)
-          setStudents(data);
+          setStudents(studentsQuery.data);
         else
           setStudents(students);
     }
@@ -57,7 +62,7 @@ const List: FC = () => {
             onKeyDown={undefined}
           />
           { 
-            (isLoading || !students) ?
+            (studentsQuery.isLoading || !students) ?
               <Spinner /> :
               students.map(student => {
                 return (

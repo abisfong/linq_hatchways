@@ -3,7 +3,7 @@ import Student from "../Student";
 import Node from "./Node";
 
 export default class Trie {
-  private root: { [key: string]: Node};
+  private root: { [key: string]: Node };
   
   constructor() {
     this.root = {};
