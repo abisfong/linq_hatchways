@@ -88,12 +88,16 @@
     width: 87px;
   }
 
-  .tags > input {
+  .tags + input {
     font-size: 16px;
     
     margin: 0;
     
     width: 140px;
+  }
+
+  .tag {
+    
   }
 }
 

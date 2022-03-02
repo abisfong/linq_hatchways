@@ -13,6 +13,7 @@ const ListItem: FC<{
   student
 }): JSX.Element => {
   const [showGrades, setShowGrades] = useState<boolean>(false);
+  const [tags, setTags] = useState<string[]>(student.tags);
   const { 
     pic,
     firstName, 
@@ -22,13 +23,13 @@ const ListItem: FC<{
     skill, 
     grades
   } = student
-  const tags = student.tags;
 
   function onKeyDownHandler(e: any) {
     const inputEl = e.target
 
     if (e.key === 'Enter') {
-      tags.push(inputEl.value);
+      student.tags.push(inputEl.value);
+      setTags([...student.tags]);
       inputEl.value = '';
       console.log(student);
     }
@@ -59,11 +60,11 @@ const ListItem: FC<{
             }
           </ul>
         </li>
-        <li className='tags'>
-          <ul>
+        <li>
+          <ul className='tags'>
             {
               tags.map((tag, i) => (
-                <li key={ i }>
+                <li className='tag' key={ i }>
                   { tag }
                 </li>
               ))
