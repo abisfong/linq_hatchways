@@ -17,7 +17,6 @@ const List: FC = () => {
       const trie = trieQuery.data;
 
       students.forEach(student => {
-        // console.log(student);
         student.names().forEach(name => trie?.insert('students', name, student));
       })
       setStudents(students);
