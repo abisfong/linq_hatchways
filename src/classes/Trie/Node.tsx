@@ -19,7 +19,7 @@ export default class Node {
     this.children[lowerCaseChar].students[student.id] = student;
   }
 
-  public get(char: string): Node {
+  public getChild(char: string): Node {
     const lowerCaseChar = char.toLowerCase();
 
     return this.children[lowerCaseChar];

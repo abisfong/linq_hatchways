@@ -13,7 +13,7 @@ export default class Trie {
     let currNode: Node | undefined = this.root[branchName];
 
     for(let i = 0; i < input.length && currNode !== undefined; i++)
-      currNode = currNode.get(input[i]);
+      currNode = currNode.getChild(input[i]);
 
     return currNode ? sortStudents(Object.values(currNode.students)) : [];
   }
@@ -23,7 +23,7 @@ export default class Trie {
 
     for (const char of string) {
       currNode.addChild(char, value);
-      currNode = currNode.get(char);
+      currNode = currNode.getChild(char);
     }
   }
 }

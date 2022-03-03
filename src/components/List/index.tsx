@@ -10,7 +10,7 @@ import Input from '../Input';
 import Spinner from '../Icons/SpinnerIcon';
 
 const List: FC = () => {
-  const [searchInput] = useState<{ [key: string]: string }>({});
+  // const [searchInput] = useState<{ [key: string]: string }>({});
   const [students, setStudents] = useState<Student[]>([]);
   const useQueryOptions = {
     onSuccess: (students: Student[]) => { 
@@ -28,16 +28,22 @@ const List: FC = () => {
     useQueryOptions
   );
   const trieQuery = useQuery<Trie>(
-    'trie', 
+    'trie',
+    () => new Trie(),
     { 
       refetchOnWindowFocus: false,
-      initialData: new Trie(),
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      staleTime: Infinity,
       enabled: false
     }
   );
 
-  if (trieQuery.status !== 'success')
+  if (!trieQuery.isFetchedAfterMount) {
+    console.log('refetching');
     trieQuery.refetch();
+  }
 
   function onChangeHandler(branchName: string): Function {
     return (e: any) => {
@@ -50,7 +56,8 @@ const List: FC = () => {
       else
         setStudents(students);
 
-      searchInput[branchName] = input;
+      // searchInput[branchName] = input;
+      // console.log(searchInput);
     }
   }
   
