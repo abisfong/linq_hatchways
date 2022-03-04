@@ -1,4 +1,4 @@
-import sortStudents from "../../utils/sortStudents";
+import ITrieNodeStudents from "../../interfaces/ITrieNodeStudents";
 import Student from "../Student";
 import Node from "./Node";
 
@@ -9,13 +9,13 @@ export default class Trie {
     this.root = {};
   }
 
-  public search(branchName: string, input: string): Student[] {
+  public search(branchName: string, input: string): ITrieNodeStudents {
     let currNode: Node | undefined = this.root[branchName];
 
     for(let i = 0; i < input.length && currNode !== undefined; i++)
       currNode = currNode.getChild(input[i]);
 
-    return currNode ? sortStudents(Object.values(currNode.students)) : [];
+    return currNode ? currNode.students : {};
   }
 
   public insert(branchName: string, string: string, value: Student) {

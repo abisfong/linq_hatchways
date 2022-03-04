@@ -8,6 +8,7 @@ import Student from '../../classes/Student';
 import Input from '../Input';
 import Spinner from '../Icons/SpinnerIcon';
 import TrieContext from '../../context/TrieContext';
+import sortStudents from '../../utils/sortStudents';
 
 const List: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -26,10 +27,20 @@ const List: FC = () => {
     useQueryOptions
   );
 
-  function onChangeHandler(branchName: string): Function {
+  function onChangeHandler(): Function {
+    const branchNames = ['students', 'tags'];
+
     return (e: any) => {
       const input = e.target.value;
-      const students = trie ? trie.search(branchName, input) : [];
+      const searchResults = branchNames.map(branchName => {
+        return trie.search(branchName, input);
+      })
+      const studentsHash = searchResults.reduce((acc, students) => {
+        for (const key in students)
+          acc[key] = students[key];
+        return acc;
+      }, {});
+      const students = sortStudents(Object.values(studentsHash));
   
       if (studentsQuery.data && !input.length)
         setStudents(studentsQuery.data);
@@ -44,12 +55,12 @@ const List: FC = () => {
         <ul className='col-9'>
           <Input 
             placeholder='Search by name'
-            onChange={ debounce(onChangeHandler('students')) }
+            onChange={ debounce(onChangeHandler()) }
             onKeyDown={ undefined }
           />
           <Input
             placeholder='Search by tag'
-            onChange={debounce(onChangeHandler('tags'))}
+            onChange={debounce(onChangeHandler())}
             onKeyDown={undefined}
           />
           {

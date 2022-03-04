@@ -1,9 +1,11 @@
+import ITrieNodeChildren from "../../interfaces/ITrieNodeChildren";
+import ITrieNodeStudents from "../../interfaces/ITrieNodeStudents";
 import Student from "../Student";
 
 export default class Node {
   public value: string | null;
-  public students: { [key: string]: Student };
-  public children: { [key: string]: Node };
+  public students: ITrieNodeStudents;
+  public children: ITrieNodeChildren;
 
   constructor(value: string | null) {
     this.value = value;
