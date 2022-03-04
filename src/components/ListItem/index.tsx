@@ -1,7 +1,6 @@
-import { FC, useState } from 'react';
-import { useQuery } from 'react-query';
+import { FC, useContext, useState } from 'react';
 import Student from '../../classes/Student';
-import Trie from '../../classes/Trie';
+import TrieContext from '../../context/TrieContext';
 import roundTo2DecimalPlaces from '../../utils/roundTo2DecimalPlaces';
 import Minus from '../Icons/MinusIcon';
 import Plus from '../Icons/PlusIcon';
@@ -24,8 +23,7 @@ const ListItem: FC<{
     skill, 
     grades
   } = student
-  const trieQuery = useQuery<Trie>('trie');
-  const trie = trieQuery.data;
+  const trie = useContext(TrieContext);
 
   function onKeyDownHandler(e: any) {
     const inputEl = e.target;
@@ -36,7 +34,6 @@ const ListItem: FC<{
       student.tags.push(inputEl.value);
       setTags([...student.tags]);
       inputEl.value = '';
-      console.log('trie', trie);
     }
   }
 

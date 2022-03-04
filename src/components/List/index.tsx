@@ -1,21 +1,19 @@
-import { useState, FC } from 'react';
+import { useState, FC, useContext } from 'react';
 import { useQuery } from 'react-query';
 import debounce from '../../utils/debounce';
 import { fetchStudents } from '../../utils/studentApi';
-import Trie from '../../classes/Trie';
 import ListItem from '../ListItem';
 import './List.scss';
 import Student from '../../classes/Student';
 import Input from '../Input';
 import Spinner from '../Icons/SpinnerIcon';
+import TrieContext from '../../context/TrieContext';
 
 const List: FC = () => {
-  // const [searchInput] = useState<{ [key: string]: string }>({});
   const [students, setStudents] = useState<Student[]>([]);
+  const trie = useContext(TrieContext);
   const useQueryOptions = {
     onSuccess: (students: Student[]) => { 
-      const trie = trieQuery.data;
-
       students.forEach(student => {
         student.names().forEach(name => trie?.insert('students', name, student));
       })
@@ -27,37 +25,16 @@ const List: FC = () => {
     fetchStudents,
     useQueryOptions
   );
-  const trieQuery = useQuery<Trie>(
-    'trie',
-    () => new Trie(),
-    { 
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      retry: false,
-      staleTime: Infinity,
-      enabled: false
-    }
-  );
-
-  if (!trieQuery.isFetchedAfterMount) {
-    console.log('refetching');
-    trieQuery.refetch();
-  }
 
   function onChangeHandler(branchName: string): Function {
     return (e: any) => {
       const input = e.target.value;
-      const trie = trieQuery.data;
       const students = trie ? trie.search(branchName, input) : [];
   
       if (studentsQuery.data && !input.length)
         setStudents(studentsQuery.data);
       else
         setStudents(students);
-
-      // searchInput[branchName] = input;
-      // console.log(searchInput);
     }
   }
   
@@ -75,14 +52,14 @@ const List: FC = () => {
             onChange={debounce(onChangeHandler('tags'))}
             onKeyDown={undefined}
           />
-          { 
+          {
             (studentsQuery.isLoading || !students) ?
               <Spinner /> :
               students.map(student => {
                 return (
                   <ListItem 
                     student={ student } 
-                    key={ student.id } 
+                    key={ student.id }
                   />
                 )
               })
