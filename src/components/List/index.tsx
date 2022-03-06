@@ -9,10 +9,11 @@ import Input from '../Input';
 import Spinner from '../Icons/SpinnerIcon';
 import TrieContext from '../../context/TrieContext';
 import sortStudents from '../../utils/sortStudents';
+import ITrieNodeStudents from '../../interfaces/ITrieNodeStudents';
 
 const List: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
-  const [searchInput] = useState<{ [key: string]: string }>({})
+  const [searchInput] = useState<{ [key: string]: string }>({});
   const trie = useContext(TrieContext);
   const useQueryOptions = {
     onSuccess: (students: Student[]) => { 
@@ -32,33 +33,30 @@ const List: FC = () => {
     const branchNames = ['students', 'tags'];
 
     return (e: any) => {
-      const input = e.target.value;
-      // const searchResults = branchNames.map(branchName => {
-      //   return trie.search(branchName, input);
-      // })
-      // const studentsHash = searchResults.reduce((acc, students) => {
-      //   for (const key in students)
-      //     acc[key] = students[key];
-      //   return acc;
-      // }, {});
-      // const students = sortStudents(Object.values(studentsHash));
-
-      searchInput[branchName] = input;
-      const searchResults = branchNames.map(branchName => {
-        return trie.search(branchName, input);
+      const input = searchInput[branchName] = e.target.value;
+      const searchResults = branchNames.map((branchName) => {
+        return trie.search(branchName, searchInput[branchName] || '');
       })
-      const studentsHash = searchResults.reduce((acc, students) => {
-        for (const key in students)
-          acc[key] = students[key];
+      let prevStudents: ITrieNodeStudents | null = null;
+      const studentsHash = searchResults.reduce((acc, searchResult) => {
+        for (const key in searchResult) {
+          if (prevStudents)
+            if (acc[key] && searchResult[key])
+              acc[key] = searchResult[key];
+          else
+            acc[key] = searchResult[key];
+        }
+        prevStudents = searchResult;
         return acc;
       }, {});
-      const students = sortStudents(Object.values(studentsHash));
+      const studentsArrOrdered = sortStudents(Object.values(studentsHash));
+      debugger;
 
   
       if (studentsQuery.data && !input.length)
         setStudents(studentsQuery.data);
       else
-        setStudents(students);
+        setStudents(studentsArrOrdered);
     }
   }
   
