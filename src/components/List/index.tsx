@@ -10,13 +10,13 @@ import Spinner from '../Icons/SpinnerIcon';
 import TrieContext from '../../context/TrieContext';
 import sortStudents from '../../utils/sortStudents';
 import ITrieNodeStudents from '../../interfaces/ITrieNodeStudents';
-import { access } from 'fs';
 
 const List: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [searchInput] = useState<{ [key: string]: string }>({});
   const trie = useContext(TrieContext);
   const useQueryOptions = {
+    refetchOnWindowFocus: false,
     onSuccess: (students: Student[]) => { 
       students.forEach(student => {
         student.names().forEach(name => trie?.insert('students', name, student));
@@ -31,35 +31,42 @@ const List: FC = () => {
   );
 
   function onChangeHandler(branchName: string): Function {
-    const branchNames = ['students', 'tags'];
-
     return (e: any) => {
-      const input = searchInput[branchName] = e.target.value;
-      const searchResults = branchNames.reduce((acc, branchName) => {
-        const searchResult = trie.search(branchName, searchInput[branchName]);
-        const intersection = {};
-        
-        if (!searchInput[branchName])
-          return acc;
-
-        for (const key in searchResult) {
-          if (acc[key] && searchResult[key])
-            intersection[key] = searchResult[key];
-        }
-        return {};
-      }, {});
+      searchInput[branchName] = e.target.value;
+      const searchResults = searchForStudents();
       const students = sortStudents(Object.values(searchResults));
   
-      if (studentsQuery.data && !students.length)
+      if (studentsQuery.data && !students.length && !inputIsEmpty())
         setStudents(studentsQuery.data);
       else
         setStudents(students);
     }
   }
 
-  // function getMatchingStudentsFromTrie() {
-  //   const branchNames = ['students', 'tags'];
-  // }
+  function searchForStudents() {
+    const branchNames = ['students', 'tags'];
+
+    return branchNames.reduce((acc: ITrieNodeStudents, branchName) => {
+      const searchResult = trie.search(branchName, searchInput[branchName] || '');
+      const intersection: ITrieNodeStudents = {};
+
+      if (!searchInput[branchName])
+        return acc;
+
+      if (!Object.values(acc).length)
+        return searchResult;
+
+      for (const key in searchResult)
+        if (acc[key] && searchResult[key])
+          intersection[key] = searchResult[key];
+
+      return intersection;
+    }, {});
+  }
+
+  function inputIsEmpty() {
+    return Object.values(searchInput).some(input => input.length > 0);
+  }
   
   return (
     <div className='list container'>  
