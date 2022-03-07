@@ -9,11 +9,12 @@ import Input from '../Input';
 import Spinner from '../Icons/SpinnerIcon';
 import TrieContext from '../../context/TrieContext';
 import sortStudents from '../../utils/sortStudents';
+import IObjectOfStrings from '../../interfaces/IObjectOfStrings';
 import ITrieNodeStudents from '../../interfaces/ITrieNodeStudents';
 
 const List: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
-  const [searchInput] = useState<{ [key: string]: string }>({});
+  const [searchInput] = useState<IObjectOfStrings>({});
   const trie = useContext(TrieContext);
   const useQueryOptions = {
     refetchOnWindowFocus: false,
