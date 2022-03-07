@@ -12,7 +12,7 @@ function App() {
   return (
     <QueryClientProvider client={new QueryClient()}>
       <List/>
-      <ReactQueryDevtools initialIsOpen={true} />
+      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
     </QueryClientProvider>
   );
 }
