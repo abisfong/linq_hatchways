@@ -10,6 +10,7 @@ import Spinner from '../Icons/SpinnerIcon';
 import TrieContext from '../../context/TrieContext';
 import sortStudents from '../../utils/sortStudents';
 import ITrieNodeStudents from '../../interfaces/ITrieNodeStudents';
+import { access } from 'fs';
 
 const List: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -34,31 +35,31 @@ const List: FC = () => {
 
     return (e: any) => {
       const input = searchInput[branchName] = e.target.value;
-      const searchResults = branchNames.map((branchName) => {
-        return trie.search(branchName, searchInput[branchName] || '');
-      })
-      let prevStudents: ITrieNodeStudents | null = null;
-      const studentsHash = searchResults.reduce((acc, searchResult) => {
-        for (const key in searchResult) {
-          if (prevStudents)
-            if (acc[key] && searchResult[key])
-              acc[key] = searchResult[key];
-          else
-            acc[key] = searchResult[key];
-        }
-        prevStudents = searchResult;
-        return acc;
-      }, {});
-      const studentsArrOrdered = sortStudents(Object.values(studentsHash));
-      debugger;
+      const searchResults = branchNames.reduce((acc, branchName) => {
+        const searchResult = trie.search(branchName, searchInput[branchName]);
+        const intersection = {};
+        
+        if (!searchInput[branchName])
+          return acc;
 
+        for (const key in searchResult) {
+          if (acc[key] && searchResult[key])
+            intersection[key] = searchResult[key];
+        }
+        return {};
+      }, {});
+      const students = sortStudents(Object.values(searchResults));
   
-      if (studentsQuery.data && !input.length)
+      if (studentsQuery.data && !students.length)
         setStudents(studentsQuery.data);
       else
-        setStudents(studentsArrOrdered);
+        setStudents(students);
     }
   }
+
+  // function getMatchingStudentsFromTrie() {
+  //   const branchNames = ['students', 'tags'];
+  // }
   
   return (
     <div className='list container'>  
