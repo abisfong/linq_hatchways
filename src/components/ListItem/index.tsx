@@ -88,4 +88,8 @@ const ListItem: FC<{
   )
 }
 
+// const myComparison = (prevProps, nextProps) => {
+  
+// }
+
 export default ListItem;

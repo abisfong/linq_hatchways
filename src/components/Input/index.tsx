@@ -6,9 +6,9 @@ const Input: FC<{
   onChange: ChangeEventHandler<HTMLInputElement> | undefined,
   onKeyDown: KeyboardEventHandler<HTMLInputElement> | undefined,
 }> = ({ placeholder, onChange, onKeyDown }) => {
-  return <input 
-    className='input' 
-    type="text" 
+  return <input
+    className='input'
+    type="text"
     placeholder={ placeholder }
     onChange={ onChange }
     onKeyDown={ onKeyDown }
